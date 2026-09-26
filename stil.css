@@ -1,0 +1,44 @@
+:root {
+  --paper: #F4F1EA;
+  --surface: #FFFFFF;
+  --ink: #172033;
+  --ink2: #3E4658;
+  --brand: #1C2D52;
+  --line: #E2DCCF;
+  --soft: #E6EAF3;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.65 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+main { max-width: 760px; margin: 0 auto; padding: 28px 16px 64px; }
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+header a { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 12px; }
+.mark {
+  width: 40px; height: 40px; border-radius: 12px; background: var(--brand); color: #fff;
+  display: grid; place-items: center; font: 800 20px/1 'Bricolage Grotesque', sans-serif;
+}
+.name { font: 700 20px/1 'Bricolage Grotesque', sans-serif; letter-spacing: -0.3px; }
+h1 { font: 800 clamp(28px, 6vw, 38px)/1.1 'Bricolage Grotesque', sans-serif; letter-spacing: -0.8px; margin: 0 0 8px; }
+h2 { font: 700 21px/1.25 'Bricolage Grotesque', sans-serif; margin: 34px 0 8px; }
+.meta { color: var(--ink2); font-size: 14px; margin: 0 0 24px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; margin: 16px 0; }
+.note { background: var(--soft); border-radius: 14px; padding: 14px 16px; }
+ul { padding-left: 22px; }
+li { margin: 4px 0; }
+a { color: var(--brand); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+th { font-weight: 700; }
+.table { overflow-x: auto; }
+nav.links { display: grid; gap: 12px; }
+nav.links a {
+  display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  padding: 16px 18px; text-decoration: none; color: var(--ink); font-weight: 700;
+}
+nav.links a span { display: block; font-weight: 400; color: var(--ink2); font-size: 14px; }
+footer { margin-top: 48px; color: var(--ink2); font-size: 14px; }
