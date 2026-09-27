@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KadroBul — Kamu ilanı</title>
+<meta name="description" content="Bu kamu ilanının şartlarını KadroBul'da kendi bilgilerinle tek tek karşılaştır.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KadroBul">
+<meta property="og:title" content="KadroBul — Sana uygun kamu ilanını bul">
+<meta property="og:description" content="Bu ilanın şartlarını KadroBul'da kendi bilgilerinle tek tek karşılaştır.">
+<meta property="og:image" content="https://oguzhanoral-byte.github.io/kadrobul-yasal/ilan/kapak.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F4F1EA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Figtree:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../stil.css">
+<style>
+  main { max-width: 620px; }
+  .over { font: 700 12px/1.4 'Figtree', sans-serif; letter-spacing: .6px; color: var(--ink2); text-transform: none; margin: 0 0 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 6px; }
+  .chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: 14px; font-weight: 600; }
+  .when { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .when b { font: 700 19px/1.2 'Bricolage Grotesque', sans-serif; }
+  .urgent { color: #9B2F10; }
+  .soon { color: #1E4E78; }
+  .muted { color: var(--ink2); font-size: 14px; }
+  .pos { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .pos:last-child { border-bottom: 0; }
+  .pos.shared { background: #FDF6EA; margin: 0 -20px; padding: 12px 20px; border-radius: 12px; border-bottom: 0; }
+  .cta { background: var(--brand); color: #fff; border-radius: 22px; padding: 22px; margin: 22px 0; position: relative; overflow: hidden; }
+  .cta h2 { color: #fff; margin: 0 0 6px; padding-right: 92px; }
+  .cta p { margin: 0 0 16px; color: rgba(255,255,255,.85); }
+  .stamp { position: absolute; right: 16px; top: 16px; transform: rotate(-9deg); border: 2.5px solid rgba(255,255,255,.55); border-radius: 9px; padding: 1.5px; opacity: .8; }
+  .stamp span { display: block; border: 1.5px solid rgba(255,255,255,.55); border-radius: 6px; padding: 3px 9px; font: 800 12px/1.2 'Bricolage Grotesque', sans-serif; letter-spacing: 2px; color: rgba(255,255,255,.8); }
+  .buttons { display: grid; gap: 10px; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; border-radius: 14px; font-weight: 700; text-decoration: none; }
+  .btn.light { background: var(--paper); color: var(--brand); }
+  .btn.ghost { color: #fff; border: 1.5px solid rgba(255,255,255,.35); }
+  .btn.off { opacity: .55; pointer-events: none; }
+  .btn small { font-weight: 600; opacity: .8; }
+  .skel { height: 18px; border-radius: 6px; background: #ECE7DC; margin: 10px 0; animation: pulse 1.2s ease-in-out infinite alternate; }
+  @keyframes pulse { from { opacity: .5 } to { opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) { .skel { animation: none; } }
+  .logo { width: 40px; height: 40px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <a href="../">
+      <svg class="logo" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="8" fill="#1C2D52"/><rect x="5" y="5" width="20" height="20" rx="5" fill="none" stroke="#F4F1EA" stroke-width="1.2" stroke-dasharray="2 2"/><path d="m10 15.5 3.3 3.3L20.5 11" fill="none" stroke="#F4F1EA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="name">KadroBul</span>
+    </a>
+  </header>
+
+  <div id="ilan">
+    <div class="skel" style="width:45%"></div>
+    <div class="skel" style="width:80%;height:34px"></div>
+    <div class="skel" style="width:60%"></div>
+  </div>
+
+  <section class="cta" id="cta">
+    <div class="stamp" aria-hidden="true"><span>UYGUN</span></div>
+    <h2 id="cta-baslik">Bu ilana uygun musun?</h2>
+    <p>KadroBul her pozisyonun şartlarını senin mezuniyetin, KPSS puanın ve diğer bilgilerinle tek tek karşılaştırır. Uyduklarını mühürler, emin olamadıklarını sana söyler.</p>
+    <div class="buttons">
+      <a class="btn light" id="ios" href="https://apps.apple.com/tr/app/id6816638026">App Store'dan indir</a>
+      <a class="btn light" id="android" href="https://play.google.com/store/apps/details?id=com.kadrobul.app">Google Play'den indir</a>
+      <a class="btn ghost" id="ac" href="kadrobul://">KadroBul yüklüyse uygulamada aç</a>
+    </div>
+  </section>
+
+  <div id="pozisyonlar"></div>
+
+  <p class="muted">
+    Kaynak: <a href="https://kamuilan.sbb.gov.tr/">kamuilan.sbb.gov.tr</a> (Cumhurbaşkanlığı Strateji ve Bütçe Başkanlığı).
+    KadroBul resmî bir kurum değildir; başvurular kurumların kendi sayfalarından yapılır. Başvurmadan önce resmî ilanı mutlaka oku.
+  </p>
+  <footer><a href="../gizlilik.html">Gizlilik</a> · <a href="../kosullar.html">Kullanım şartları</a> · <a href="mailto:oguzhan_oral@outlook.com">İletişim</a></footer>
+</main>
+
+<script>
+// Public by design: the publishable key reads only what row-level security
+// allows, and notices are public. Nothing about any person is read here.
+const SUPABASE = 'https://gukniwsaparyxlqukfzx.supabase.co';
+const KEY = 'sb_publishable_NQ_AXHwcUtiUxdaMAxmYsQ_W3IpBhk_';
+// Store pages open once the app is published there; until then the buttons say "yakında".
+const IN_STORE = { ios: false, android: false };
+
+const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+const EMPLOYMENT = { memur: 'Memur', sozlesmeli: 'Sözleşmeli (4/B)', askeri: 'Askerî sözleşmeli', kalkinma_ajansi: 'Kalkınma ajansı', isci: 'İşçi', akademik: 'Akademik', diger: 'Diğer' };
+const EMPLOYMENT_LONG = { memur: 'Memur', sozlesmeli: 'Sözleşmeli personel', askeri: 'Askerî sözleşmeli', kalkinma_ajansi: 'Kalkınma ajansı personeli', isci: 'İşçi', akademik: 'Akademik personel', diger: 'Personel' };
+const SELECTION = { kpss_siralamasi: 'Sınav yok · KPSS sırası', sozlu_sinav: 'Sözlü sınav', yazili_sinav: 'Yazılı sınav', yazili_ve_sozlu: 'Yazılı + sözlü sınav' };
+
+const lowerTr = s => s.replace(/I/g, 'ı').replace(/İ/g, 'i').toLocaleLowerCase('tr-TR');
+const upperTr = s => s.replace(/i/g, 'İ').replace(/ı/g, 'I').toLocaleUpperCase('tr-TR');
+const sentence = s => { const l = lowerTr(s.trim()); const i = l.search(/\p{L}/u); return i < 0 ? l : l.slice(0, i) + upperTr(l[i]) + l.slice(i + 1); };
+const day = iso => `${Number(iso.slice(8, 10))} ${MONTHS[Number(iso.slice(5, 7)) - 1]}`;
+const baseTitle = t => t.replace(/\s*\([^)]*\)\s*$/g, '').replace(/\s*\([^)]*\)\s*$/g, '').trim() || t;
+
+// Same wording as the app (packages/core/src/feed.ts).
+function headlineTitle(h) {
+  h = h.replace(/\s+/g, ' ').trim().replace(/\(?\s*SÜRE\s+UZATIM[Iİ]\s*\)?/iu, ' ').replace(/\bDÜZELTME\b/iu, ' ').replace(/\s+/g, ' ').trim();
+  const m = /(?:^|\s)(\d+)\s+(.*?)\s*(?:ALACAK(?:TIR)?|TEMİN EDECEKTİR)\.?\s*(?:\((.*?)\)?)?\s*$/u.exec(h);
+  if (m) {
+    const what = m[2].trim();
+    const head = !what ? 'Personel' : /\d/.test(what) ? lowerTr(`${m[1]} ${what}`) : sentence(what);
+    return `${head} alımı${m[3] ? ` (${lowerTr(m[3].trim())})` : ''}`;
+  }
+  return sentence(h.replace(/^(ÜNİVERSİTESİ|BAŞKANLIĞI|MÜDÜRLÜĞÜ)\s+/u, '').replace(/\s+ALIM\s+İLANI$/u, ' ALIMI').replace(/\s+İLANI$/u, ''));
+}
+function summary(row) {
+  const n = row.notice;
+  if (!n) return headlineTitle(row.headline);
+  const titles = [...new Set(n.positions.map(p => lowerTr(baseTitle(p.title))))];
+  if (!titles.length) return n.title;
+  if (titles.length > 3) return `${EMPLOYMENT_LONG[n.employment]} — ${new Set(n.positions.map(p => lowerTr(p.title))).size} unvan`;
+  return sentence(titles.join(', '));
+}
+
+function el(tag, attrs, ...children) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+  for (const c of children) if (c != null && c !== false) e.append(c); // text, never HTML
+  return e;
+}
+
+function todayIstanbul() {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul' }).format(new Date());
+}
+const daysBetween = (a, b) => Math.round((Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 86400000);
+
+function render(row, pos) {
+  const n = row.notice;
+  const box = document.getElementById('ilan');
+  box.textContent = '';
+  const shared = n && pos != null ? n.positions[pos] : null;
+  const twin = p => n.positions.filter(x => x.title === p.title).length > 1 && p.code;
+  const title = shared ? (twin(shared) ? `${shared.title} · kod ${shared.code}` : shared.title) : summary(row);
+  document.title = `${title} — ${row.institution} · KadroBul`;
+  const people = shared ? shared.count
+    : n ? (n.positions.every(p => p.count != null) ? n.positions.reduce((s, p) => s + p.count, 0) : null) : (/^(\d+)\s/.exec(row.headline) || [])[1];
+  const cities = n ? [...new Set((shared ? [shared] : n.positions).map(p => p.city).filter(Boolean))] : [];
+  box.append(
+    el('p', { class: 'over' }, upperTr(row.institution)),
+    el('h1', {}, title),
+    shared ? el('p', { class: 'muted', style: 'margin:0' }, `“${summary(row)}” ilanından`) : null,
+    el('div', { class: 'chips' }, ...[n && EMPLOYMENT[n.employment], people ? `${people} kişi` : null, cities.length === 1 ? cities[0] : null, n && SELECTION[n.selection]]
+      .filter(Boolean).map(t => el('span', { class: 'chip' }, t))),
+  );
+
+  const today = todayIstanbul();
+  if (row.end_date) {
+    const closed = row.end_date < today, upcoming = row.start_date && row.start_date > today;
+    const left = daysBetween(today, row.end_date);
+    const status = closed ? el('span', { class: 'muted' }, 'Başvuru kapandı')
+      : upcoming ? el('span', { class: 'soon' }, `${day(row.start_date)} açılıyor`)
+      : el('span', { class: left <= 7 ? 'urgent' : 'muted' }, left === 0 ? 'Bugün son gün' : `${left} gün kaldı`);
+    box.append(el('div', { class: 'card when' },
+      el('div', {}, el('div', { class: 'muted' }, 'Son başvuru'), el('b', {}, day(row.end_date))),
+      status));
+  }
+
+  if (n && n.positions.length) {
+    const list = document.getElementById('pozisyonlar');
+    list.textContent = '';
+    const allCities = new Set(n.positions.map(p => p.city).filter(Boolean)).size;
+    const card = el('div', { class: 'card' }, el('h2', { style: 'margin:0 0 6px' }, `Pozisyonlar (${n.positions.length})`));
+    n.positions.forEach((p, i) => {
+      card.append(el('div', { class: `pos${i === pos ? ' shared' : ''}` },
+        el('span', {}, twin(p) ? `${p.title} · kod ${p.code}` : p.title),
+        // The city is on the chips when every position shares it.
+        el('span', { class: 'muted', style: 'white-space:nowrap' }, [p.count != null ? `${p.count} kişi` : null, allCities > 1 ? p.city : null].filter(Boolean).join(' · '))));
+    });
+    list.append(card);
+    if (shared) document.getElementById('cta-baslik').textContent = 'Bu pozisyona uygun musun?';
+  }
+}
+
+function missing() {
+  const box = document.getElementById('ilan');
+  box.textContent = '';
+  box.append(el('h1', {}, 'Bu ilan artık listede yok'), el('p', { class: 'meta' }, 'Başvuru süresi dolmuş ya da ilan kaldırılmış olabilir. KadroBul açık kamu ilanlarını her gün kontrol eder.'));
+}
+
+for (const [id, on] of Object.entries(IN_STORE)) {
+  const a = document.getElementById(id);
+  if (!on) { a.classList.add('off'); a.append(' ', el('small', {}, '· yakında')); }
+}
+
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const pos = params.has('p') ? Number(params.get('p')) : null;
+if (id) document.getElementById('ac').href = `kadrobul://ilan/${encodeURIComponent(id)}${pos != null ? `/${pos}` : ''}`;
+
+if (!id) missing();
+else fetch(`${SUPABASE}/rest/v1/notices?id=eq.${encodeURIComponent(id)}&select=id,institution,headline,start_date,end_date,notice,active`, { headers: { apikey: KEY } })
+  .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+  .then(rows => (rows[0] ? render(rows[0], pos) : missing()))
+  .catch(missing);
+</script>
+</body>
+</html>
