@@ -74,7 +74,7 @@
   <div id="pozisyonlar"></div>
 
   <p class="muted">
-    Kaynak: <a href="https://kamuilan.sbb.gov.tr/">kamuilan.sbb.gov.tr</a> (Cumhurbaşkanlığı Strateji ve Bütçe Başkanlığı).
+    <span id="kaynak">Kaynak: <a href="https://kamuilan.sbb.gov.tr/">kamuilan.sbb.gov.tr</a> (Cumhurbaşkanlığı Strateji ve Bütçe Başkanlığı).</span>
     KadroBul resmî bir kurum değildir; başvurular kurumların kendi sayfalarından yapılır. Başvurmadan önce resmî ilanı mutlaka oku.
   </p>
   <footer><a href="../gizlilik.html">Gizlilik</a> · <a href="../kosullar.html">Kullanım şartları</a> · <a href="mailto:oguzhan_oral@outlook.com">İletişim</a></footer>
@@ -91,6 +91,14 @@ const IN_STORE = { ios: false, android: false };
 const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 const EMPLOYMENT = { memur: 'Memur', sozlesmeli: 'Sözleşmeli (4/B)', askeri: 'Askerî sözleşmeli', kalkinma_ajansi: 'Kalkınma ajansı', isci: 'İşçi', akademik: 'Akademik', diger: 'Diğer' };
 const EMPLOYMENT_LONG = { memur: 'Memur', sozlesmeli: 'Sözleşmeli personel', askeri: 'Askerî sözleşmeli', kalkinma_ajansi: 'Kalkınma ajansı personeli', isci: 'İşçi', akademik: 'Akademik personel', diger: 'Personel' };
+// The official sites a notice is found on (same names as the app, apps/mobile/src/labels.ts).
+const SITES = {
+  sbb: { name: 'kamuilan.sbb.gov.tr', owner: 'Cumhurbaşkanlığı Strateji ve Bütçe Başkanlığı', home: 'https://kamuilan.sbb.gov.tr/' },
+  ilan_gov_tr: { name: 'ilan.gov.tr', owner: 'Basın İlan Kurumu', home: 'https://www.ilan.gov.tr/ilan/tum-ilanlar/personel-alimi?ats=5' },
+  kariyer_kapisi: { name: 'Kariyer Kapısı', owner: 'Cumhurbaşkanlığı İnsan Kaynakları Ofisi', home: 'https://kariyerkapisi.gov.tr/isealim' },
+  yerel_yonetimler: { name: 'yerelyonetimler.csb.gov.tr', owner: 'Çevre, Şehircilik ve İklim Değişikliği Bakanlığı', home: 'https://yerelyonetimler.csb.gov.tr/duyurular' },
+  iskur: { name: 'iskur.gov.tr', owner: 'Türkiye İş Kurumu', home: 'https://www.iskur.gov.tr/ilanlar/kamu-memur-alim-ilanlari/' },
+};
 const SELECTION = { kpss_siralamasi: 'Sınav yok · KPSS sırası', sozlu_sinav: 'Sözlü sınav', yazili_sinav: 'Yazılı sınav', yazili_ve_sozlu: 'Yazılı + sözlü sınav' };
 
 const lowerTr = s => s.replace(/I/g, 'ı').replace(/İ/g, 'i').toLocaleLowerCase('tr-TR');
@@ -178,6 +186,22 @@ function render(row, pos) {
   }
 }
 
+function sources(row) {
+  // One link per site: a correction notice on the same site adds a second record.
+  const found = (Array.isArray(row.kaynaklar) ? row.kaynaklar : [])
+    .filter((s, i, all) => s && Object.hasOwn(SITES, s.site) && all.findIndex(x => x && x.site === s.site) === i);
+  const list = found.length ? found : [{ site: 'sbb' }];
+  const line = document.getElementById('kaynak');
+  line.textContent = 'Kaynak: ';
+  list.forEach((s, i) => {
+    if (i) line.append(' · ');
+    // Only the site's own https page; anything else falls back to its home page.
+    const href = typeof s.url === 'string' && /^https:\/\//.test(s.url) ? s.url : SITES[s.site].home;
+    line.append(el('a', { href }, SITES[s.site].name));
+  });
+  line.append(list.length === 1 ? ` (${SITES[list[0].site].owner}).` : '.');
+}
+
 function missing() {
   const box = document.getElementById('ilan');
   box.textContent = '';
@@ -195,9 +219,9 @@ const pos = params.has('p') ? Number(params.get('p')) : null;
 if (id) document.getElementById('ac').href = `kadrobul://ilan/${encodeURIComponent(id)}${pos != null ? `/${pos}` : ''}`;
 
 if (!id) missing();
-else fetch(`${SUPABASE}/rest/v1/notices?id=eq.${encodeURIComponent(id)}&select=id,institution,headline,start_date,end_date,notice,active`, { headers: { apikey: KEY } })
+else fetch(`${SUPABASE}/rest/v1/notices?id=eq.${encodeURIComponent(id)}&select=id,institution,headline,start_date,end_date,notice,active,kaynaklar`, { headers: { apikey: KEY } })
   .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
-  .then(rows => (rows[0] ? render(rows[0], pos) : missing()))
+  .then(rows => { if (!rows[0]) return missing(); render(rows[0], pos); sources(rows[0]); })
   .catch(missing);
 </script>
 </body>
