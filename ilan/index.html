@@ -86,7 +86,7 @@
 const SUPABASE = 'https://gukniwsaparyxlqukfzx.supabase.co';
 const KEY = 'sb_publishable_NQ_AXHwcUtiUxdaMAxmYsQ_W3IpBhk_';
 // Store pages open once the app is published there; until then the buttons say "yakında".
-const IN_STORE = { ios: true, android: false };
+const IN_STORE = { ios: true, android: true };
 
 const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 const EMPLOYMENT = { memur: 'Memur', sozlesmeli: 'Sözleşmeli (4/B)', askeri: 'Askerî sözleşmeli', kalkinma_ajansi: 'Kalkınma ajansı', isci: 'İşçi', akademik: 'Akademik', diger: 'Diğer' };
@@ -150,13 +150,14 @@ function render(row, pos) {
   const people = shared ? shared.count
     : n ? (n.positions.every(p => p.count != null) ? n.positions.reduce((s, p) => s + p.count, 0) : null) : (/^(\d+)\s/.exec(row.headline) || [])[1];
   const cities = n ? [...new Set((shared ? [shared] : n.positions).map(p => p.city).filter(Boolean))] : [];
-  box.append(
+  // append() would print a null child as the text "null".
+  box.append(...[
     el('p', { class: 'over' }, upperTr(row.institution)),
     el('h1', {}, title),
     shared ? el('p', { class: 'muted', style: 'margin:0' }, `“${summary(row)}” ilanından`) : null,
     el('div', { class: 'chips' }, ...[n && EMPLOYMENT[n.employment], people ? `${people} kişi` : null, cities.length === 1 ? cities[0] : null, n && SELECTION[n.selection]]
       .filter(Boolean).map(t => el('span', { class: 'chip' }, t))),
-  );
+  ].filter(Boolean));
 
   const today = todayIstanbul();
   if (row.end_date) {
