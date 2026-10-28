@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KadroBul'u indir</title>
+<meta name="description" content="KadroBul: kamu ilanlarından sana uygun olanları KPSS puanına ve mezuniyetine göre bulur. App Store ve Google Play'de.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KadroBul">
+<meta property="og:title" content="KadroBul — Sana uygun kamu ilanını bul">
+<meta property="og:description" content="App Store ve Google Play'den ücretsiz indir.">
+<meta property="og:image" content="https://oguzhanoral-byte.github.io/kadrobul-yasal/ilan/kapak.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F4F1EA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Figtree:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../stil.css">
+<style>
+  main { max-width: 520px; }
+  .logo { width: 40px; height: 40px; }
+  .cta { background: var(--brand); color: #fff; border-radius: 22px; padding: 22px; margin: 8px 0 18px; }
+  .cta h1 { color: #fff; font-size: clamp(26px, 7vw, 32px); }
+  .cta p { margin: 0 0 18px; color: rgba(255,255,255,.85); }
+  .buttons { display: grid; gap: 10px; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; border-radius: 14px; font-weight: 700; text-decoration: none; text-align: center; padding: 0 14px; }
+  .btn.light { background: var(--paper); color: var(--brand); }
+  .btn.ghost { color: #fff; border: 1.5px solid rgba(255,255,255,.35); }
+  .btn[hidden] { display: none; }
+  .help { font-size: 15px; }
+  .help b { font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <a href="../">
+      <svg class="logo" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="8" fill="#1C2D52"/><rect x="5" y="5" width="20" height="20" rx="5" fill="none" stroke="#F4F1EA" stroke-width="1.2" stroke-dasharray="2 2"/><path d="m10 15.5 3.3 3.3L20.5 11" fill="none" stroke="#F4F1EA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="name">KadroBul</span>
+    </a>
+  </header>
+
+  <section class="cta">
+    <h1>Sana uygun kamu ilanını bul</h1>
+    <p>Memur, sözleşmeli ve askerî ilanların şartlarını mezuniyetin, KPSS puanın ve diğer bilgilerinle tek tek karşılaştırır.</p>
+    <div class="buttons">
+      <!-- Android: the Play Store app itself (intent), so in-app browsers such as Instagram's hand it over instead of loading Play's web page. -->
+      <a class="btn light" id="play" href="https://play.google.com/store/apps/details?id=com.kadrobul.app">Google Play'den indir</a>
+      <a class="btn light" id="appstore" href="https://apps.apple.com/tr/app/id6816638026">App Store'dan indir</a>
+      <a class="btn ghost" id="chrome" hidden href="intent://play.google.com/store/apps/details?id=com.kadrobul.app#Intent;scheme=https;package=com.android.chrome;end">Açılmadıysa: Chrome'da aç</a>
+    </div>
+  </section>
+
+  <div class="card help" id="yardim" hidden>
+    <b>Düğme açılmadıysa:</b> sağ üstteki <b>⋮</b> menüsüne dokunup <b>"Tarayıcıda aç"</b>ı seç, sonra "Google Play'den indir"e bas. Ya da Google Play'de <b>KadroBul</b> diye ara.
+  </div>
+
+  <p class="meta">KadroBul bağımsız bir uygulamadır; resmî bir kurum değildir. <a href="../gizlilik.html">Gizlilik</a> · <a href="../kosullar.html">Kullanım şartları</a></p>
+</main>
+<script>
+  // Order the buttons for the phone in hand. Instagram, Facebook and TikTok open links in
+  // their own browser, which on Android often does nothing with a plain Play web link.
+  var ua = navigator.userAgent || '';
+  var android = /Android/i.test(ua);
+  var ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var inApp = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|TikTok|Bytedance/i.test(ua);
+  var play = document.getElementById('play');
+  var appstore = document.getElementById('appstore');
+  if (android) {
+    play.href = 'intent://details?id=com.kadrobul.app#Intent;scheme=market;package=com.android.vending;'
+      + 'S.browser_fallback_url=' + encodeURIComponent('https://play.google.com/store/apps/details?id=com.kadrobul.app') + ';end';
+    appstore.hidden = true;
+    if (inApp) {
+      document.getElementById('chrome').hidden = false;
+      document.getElementById('yardim').hidden = false;
+    }
+  } else if (ios) {
+    play.parentNode.insertBefore(appstore, play);
+    play.hidden = true;
+  }
+</script>
+</body>
+</html>
